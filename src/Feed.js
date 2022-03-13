@@ -8,6 +8,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 
 import InputOption from "./InputOption";
+import Post from "./Post";
 
 function Feed() {
 	return (
@@ -31,6 +32,12 @@ function Feed() {
 					/>
 				</div>
 			</div>
+			{/* Posts */}
+			<Post
+				name="Wayne"
+				description="test post"
+				message="This is a Test Post"
+			/>
 		</div>
 	);
 }
