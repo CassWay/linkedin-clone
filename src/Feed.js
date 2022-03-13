@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import firebase from "./firebase";
+// import firebase from "./firebase";
+import firebase from "firebase/compat/app";
 import { db } from "./firebase";
 import "./Feed.css";
 
@@ -20,10 +21,12 @@ function Feed() {
 		db.collection("posts")
 			.orderBy("timestamp", "desc")
 			.onSnapshot((snapshot) =>
-				setPosts(snapshot.docs).map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				}))
+				setPosts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					}))
+				)
 			);
 	}, []);
 
