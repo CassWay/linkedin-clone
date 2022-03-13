@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase";
+import firebase from "./firebase";
 import { db } from "./firebase";
 import "./Feed.css";
 
@@ -17,24 +17,27 @@ function Feed() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		db.collection("posts").onSnapshot((snapshot) =>
-			setPosts(snapshot.docs).map((doc) => ({
-				id: doc.id,
-				data: doc.data(),
-			}))
-		);
+		db.collection("posts")
+			.orderBy("timestamp", "desc")
+			.onSnapshot((snapshot) =>
+				setPosts(snapshot.docs).map((doc) => ({
+					id: doc.id,
+					data: doc.data(),
+				}))
+			);
 	}, []);
 
 	const sendPost = (e) => {
 		e.preventDefault();
 
-		db.collection("post").add({
+		db.collection("posts").add({
 			name: "Wayne",
 			description: "this is a data test",
 			message: input,
 			photoUrl: "",
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		});
+		setInput("");
 	};
 
 	return (
