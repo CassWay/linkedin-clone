@@ -17,7 +17,7 @@ function Header() {
 
 				<div className="header__search">
 					<SearchIcon />
-					<input type="text" />
+					<input placeholder="search" type="text" />
 				</div>
 			</div>
 
